@@ -32,6 +32,17 @@ export default function Form({ route, method }) {
         }
     }
 
+    const handleRegister = async (e) => {
+        e.preventDefault ()
+        if (method == 'register') {
+            navigate ('/login')
+            method = 'login'
+            return
+        }
+        navigate ('/register')
+        method = 'register'
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <form
@@ -82,6 +93,18 @@ export default function Form({ route, method }) {
                         : method === "login"
                         ? "Login"
                         : "Register"}
+                </button>
+
+
+                
+                <button
+                    onClick={handleRegister}
+                    className="w-full bg-amber-200 text-blue-950 font-semibold py-2 rounded-lg transition duration-300"
+                    disabled={loading}
+                >
+                    {
+                        method == 'register'? 'Back to login' : 'Not have an account? Register'
+                    }
                 </button>
             </form>
         </div>

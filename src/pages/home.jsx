@@ -3,11 +3,13 @@ import api from "../api"
 import Note from "../components/Note"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { useNavigate } from "react-router-dom"
 
 export default function Home() {
     const [notes, setNotes] = useState([])
     const [content, setContent] = useState("")
     const [title, setTitle] = useState("")
+    const navigate = useNavigate ()
 
     const getNote = async () => {
         await api.get('/api/notes/')
@@ -55,6 +57,15 @@ export default function Home() {
             })
     }
 
+
+    const handleLogout = async (e) => {
+        e.preventDefault ()
+        setTimeout(() => {          
+            navigate ('/logout')
+        }, 1000);
+        toast.success ('You have been signed out!')
+    }
+
     useEffect(() => {
         getNote()
     }, [])
@@ -95,12 +106,22 @@ export default function Home() {
                                 className="w-full mt-1 px-4 py-2 h-28 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                             ></textarea>
                         </div>
-                        <button
-                            type="submit"
-                            className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition"
-                        >
-                            Submit
-                        </button>
+                        <div className="flex gap-2.5">
+                            <button
+                                type="submit"
+                                className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+                            >
+                                Submit
+                            </button>
+
+
+                            <button
+                                onClick={handleLogout}
+                                className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition"
+                            >
+                                Sign out
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

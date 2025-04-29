@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ACCESS_TOKEN } from "./constant";
 
-const api_url = 'https://apitodoapp-wiml.onrender.com/'
+const api_url = 'https://web-production-2d6f.up.railway.app/'
 
 const api = axios.create ({
     baseURL: import.meta.env.VITE_API_URL? import.meta.env.VITE_API_URL : api_url
